@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de idade</title>
+    <style>
+       *{
+        margin: 0px;
+       } 
+        
+        h1{
+            font-size: 40px;
+            color: white;
+            text-align: center;
+            padding-bottom: 20px;
+            padding-top: 20px;
+        }
+        body{
+            
+            height: 90vh;
+            background-color: rgba(47, 47, 248, 0.699);
+        }
+
+        section{
+            margin-left: auto;
+            margin-right: auto;
+            width: 450px;
+            background-color: white;
+            padding-top: 15px;
+            border-radius: 10px;
+            
+    
+        }
+
+        p{
+            font-size: 15px;
+
+        }
+
+        #Ano{
+            font-size: 16px;
+            font-weight: bold;
+            padding-top: 10px;
+            margin-left: 8px;
+        }
+
+    #MF{
+        margin-left: 10px;
+       padding-top: 10px;
+    }
+
+    #Verificar{
+        padding-bottom: 10px;
+        padding-top: 13px;
+        margin-left: 10px;
+
+    }
+
+    footer{
+        text-align: center;
+        padding-top: 20px;
+        font-family: 'Gothic Medium';
+        font-size: 20px;
+        color: white
+
+    }
+
+ 
+    #Mensagem{
+        margin-left: 7px;
+    }
+    
+    </style>
+</head>
+<body>
+    <h1>Verificador de idade</h1>
+    <section>
+ <div id="Ano">Ano de Nascimento: <input type="number" nome="Dts" id="DatadeNascimento">  </div>
+
+ <div id="MF"><b>Sexo:</b>
+     <input type="radio" name="marc" id="Masculino" > Masculino 
+     <input type="radio" name="marc" id="Feminino" > Feminino
+ </div>
+<div id="Verificar"><input type="button" value="Verificar" onclick="Verficar ()"></div>
+
+<div id="Mensagem">
+    <p>Preencha os dados Acima e clique em Verificar !</p>
+</div>
+
+<div id="img"></div>
+</section>
+<footer>Criado por : Murilo Cerqueira</footer>
+
+<script>
+    function Verficar (){
+    var data=new Date () /*Ano Atual do Sistema JS */
+    var AnoAtual=data.getUTCFullYear () /*Ano Atual do Sistema JS */
+    var DataNasc= window.document.getElementById ('DatadeNascimento') /* Data de Nascimento do Campo */
+    var Msg = window.document.getElementById  ('Mensagem') /* Mensagem noFinal */
+   
+    if (DataNasc.value.length == 0 || DataNasc > AnoAtual){ /* Caso o campo de preenchimento de Data esteja vazio ou numero da data de Nascimento esteja maior que o ano atual dé erro*/AnoAtual
+        window.alert('Ano Invalído')
+    }
+    
+
+    else {
+    var Sex = window.document.getElementsByName ('marc') /* Se o ano for Valído entao agora usará a logica com as variaveis para calcular a idade */
+    var idade= AnoAtual - Number(DataNasc.value)
+    var gênero=''
+    var img=document.createElement ('img') /* variavel img para colocar imagem*/
+    
+    
+    if (Sex[0].checked){  /* o NAME do input tem q ser igual para poder selecionar apenas um opção MASCULINO / FEMININO entao o id Sex ficará marcado ordenamente por 0 e 1 */
+        gênero='Homem' /* com Sex 0 selecionando será definido pela Variavel Genero = 'Homem */
+         if (idade <= 10 && idade >= 0){ /* com isso usará agora a logíca para definir kd foto em sua devida faixa etária  de idade */
+           img.setAttribute ('src','bebe-hm.png')
+        }
+
+        else if (idade < 18 ){
+         img.setAttribute ('src','jovem-hm.png')
+        }
+
+        else if (idade < 50){
+            img.setAttribute ('src','adulto-hm.png')
+        }
+
+        else {
+            img.setAttribute ('src','idoso-hm.png')
+        }
+    }
+     else
+     if (Sex[1].checked){ /* Caso coloque a opção 2 que seria Sex feminino acontece a mesma coisa que anteriormente */
+     gênero='Mulher'
+
+if (idade < 10){
+    img.setAttribute('src','bebe-ml.png')
+    
+}
+
+ else if  (idade < 18 ){
+    img.setAttribute('src','jovem-ml.png')
+}
+
+else if (idade < 50){
+ img.setAttribute ('src','adulto-ml.png')
+}
+
+else {
+    img.setAttribute ('src','idoso-ml.png')
+}
+ 
+}
+
+Msg.innerHTML=`<b>Detectamos ${gênero} com ${idade} anos </b>` /* Mensagem para aparecer no final da verificação como resultado na Div MSG */
+
+Msg.appendChild(img) /* criação de img na div Msg  e após o texto */
+Msg.style.textAlign='Center' 
+}
+
+
+
+
+
+
+
+    
+
+    
+  
+
+
+
+}
+
+</script>
+</body>
+</html>
